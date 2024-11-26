@@ -1,0 +1,86 @@
+import React from "react";
+import { useForm } from "react-hook-form";
+
+const RegisterForm = () => {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+
+  const password = watch("password");
+
+  const onSubmit = (data) => {
+    console.log("Form Data:", data);
+    // tutaj można obsłużyć logikę logowania, np. wysłanie danych do serwera
+  };
+
+  return (
+    <div className="login-form">
+      <h2>Rejestracja</h2>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div>
+          <label>Email:</label>
+          <input
+            type="email"
+            {...register("email", {
+              required: "Email jest wymagany",
+              pattern: {
+                value: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+                message: "Niepoprawny format email",
+              },
+            })}
+          />
+          {errors.email && <p>{errors.email.message}</p>}
+        </div>
+
+        <div>
+          <label>Login:</label>
+          <input
+            type="username"
+            {...register("username", {
+              required: "Login jest wymagany",
+              pattern: {
+                value: /^[a-zA-Z0-9_.+-]{3,}$/,
+                message: "Niepoprawny format login (min.3 znaki)",
+              },
+            })}
+          />
+          {errors.username && <p>{errors.username.message}</p>}
+        </div>
+
+        <div>
+          <label>Hasło:</label>
+          <input
+            type="password"
+            {...register("password", {
+              required: "Hasło jest wymagane",
+              minLength: {
+                value: 8,
+                message: "Hasło musi mieć przynajmniej 8 znaków",
+              },
+            })}
+          />
+          {errors.password && <p>{errors.password.message}</p>}
+        </div>
+        <div>
+          <label>Potwierdź hasło:</label>
+          <input
+            type="password"
+            {...register("confirmPassword", {
+              required: "Potwierdzenie hasła jest wymagane",
+              validate: (value) =>
+                value === password || "Hasła muszą być takie same",
+            })}
+          />
+          {errors.confirmPassword && <p>{errors.confirmPassword.message}</p>}
+        </div>
+        <button type="submit">Zarejestruj się</button>
+      </form>
+      <button>Masz konto? Zaloguj się</button>
+    </div>
+  );
+};
+
+export default RegisterForm;

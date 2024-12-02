@@ -37,6 +37,10 @@ const User = sequelize.define(
   },
   {
     tableName: "users", // Nazwa istniejącej tabeli
+<<<<<<< Updated upstream
+=======
+    timestamps: false,
+>>>>>>> Stashed changes
     //hashowanie hasła
     hooks: {
       beforeCreate: async (user) => {
@@ -52,7 +56,32 @@ const User = sequelize.define(
     },
   }
 );
+<<<<<<< Updated upstream
 User.prototype.isValidPassword = async function (password) {
   return await bcrypt.compare(password, this.password);
 };
+=======
+User.prototype.comparePassword = async function (password) {
+  return await bcrypt.compare(password, this.password);
+};
+
+User.findByLogin = async function (login) {
+  console.log("Searching for user with login:", login); // Debug
+  const user = await User.findOne({ where: { login } });
+  console.log("User found:", user); // Debug
+  return user;
+};
+
+User.findByEmail = async function (email) {
+  const user = await User.findOne({ where: { email } });
+  console.log("findByEmail result:", user); // Debugging
+  return user;
+};
+
+User.findById = async function (id) {
+  const user = await User.findOne({ where: { id } });
+  console.log("findById result:", user); // Debugging
+  return user;
+};
+>>>>>>> Stashed changes
 module.exports = User;

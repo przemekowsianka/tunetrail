@@ -20,6 +20,10 @@ const ImportedGenres = sequelize.define(
   },
   {
     tableName: "imported_genres",
+<<<<<<< Updated upstream
+=======
+    timestamps: false,
+>>>>>>> Stashed changes
   }
 );
 

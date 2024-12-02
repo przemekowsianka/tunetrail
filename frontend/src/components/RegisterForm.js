@@ -1,5 +1,9 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+<<<<<<< Updated upstream
+=======
+import { registerUser } from "../services/api";
+>>>>>>> Stashed changes
 
 const RegisterForm = () => {
   const {
@@ -11,9 +15,25 @@ const RegisterForm = () => {
 
   const password = watch("password");
 
+<<<<<<< Updated upstream
   const onSubmit = (data) => {
     console.log("Form Data:", data);
     // tutaj można obsłużyć logikę logowania, np. wysłanie danych do serwera
+=======
+  const onSubmit = async (data) => {
+    console.log("Submitting data:", JSON.stringify(data));
+    try {
+      // Wywołanie funkcji API z danymi z formularza
+      const response = await registerUser({
+        login: data.username,
+        email: data.email,
+        password: data.password,
+      });
+      alert("User registered successfully: " + response.message);
+    } catch (error) {
+      alert("Error: " + (error.response?.data?.error || error.message));
+    }
+>>>>>>> Stashed changes
   };
 
   return (

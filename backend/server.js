@@ -1,6 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const mysql = require("mysql2");
+<<<<<<< Updated upstream
 const app = express();
 const { sequelize } = require("./models");
 
@@ -9,6 +10,38 @@ app.use(express.json());
 
 //dane z .env
 require("dotenv").config();
+=======
+const { sequelize } = require("./models");
+const userRoutes = require("./routes/userRoutes");
+const authRoutes = require("./routes/authRoutes");
+const musicRoutes = require("./routes/musicRoutes");
+const axios = require("axios");
+const app = express();
+
+// Middleware globalne
+const cors = require("cors");
+app.use(cors());
+app.use(express.json()); // Parsowanie JSON dla żądań
+
+// Middleware do obsługi błędów JSON
+app.use((err, req, res, next) => {
+  if (err instanceof SyntaxError && err.status === 400 && "body" in err) {
+    console.error("Invalid JSON:", err.message);
+    return res.status(400).json({ error: "Invalid JSON format" });
+  }
+  next();
+});
+
+// Ścieżka bazowa API
+app.get("/api", (req, res) => {
+  res.send("Welcome to the API");
+});
+
+// Routing dla API
+app.use("/api/users", userRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/music", musicRoutes);
+>>>>>>> Stashed changes
 
 // Konfiguracja połączenia z bazą MySQL
 const db = mysql.createConnection({
@@ -36,6 +69,7 @@ app.get("/test-db", (req, res) => {
   });
 });
 
+<<<<<<< Updated upstream
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Serwer działa na porcie ${PORT}`);
@@ -44,8 +78,40 @@ app.listen(PORT, () => {
 (async () => {
   try {
     await sequelize.sync({ alter: false }); // alter: false, aby nie modyfikować istniejących tabel
+=======
+// Synchronizacja modeli Sequelize
+(async () => {
+  try {
+    await sequelize.sync({ alter: false }); // Ustawienie alter: false
+>>>>>>> Stashed changes
     console.log("Modele zsynchronizowane z bazą danych");
   } catch (error) {
     console.error("Błąd synchronizacji modeli:", error);
   }
 })();
+<<<<<<< Updated upstream
+=======
+
+// Uruchomienie serwera
+const PORT = process.env.PORT || 4000;
+app.listen(PORT, () => {
+  console.log(`Serwer działa na porcie ${PORT}`);
+});
+(async () => {
+  try {
+    const response = await axios.get("http://ws.audioscrobbler.com/2.0/", {
+      params: {
+        method: "chart.gettopartists",
+        api_key: process.env.LASTFM_API_KEY, // Zastąp właściwym kluczem
+        format: "json",
+      },
+    });
+    console.log("Test połączenia z Last.fm:", response.data);
+  } catch (error) {
+    console.error("Błąd połączenia z Last.fm:", error.message);
+    if (error.response) {
+      console.error("Szczegóły odpowiedzi:", error.response.data);
+    }
+  }
+})();
+>>>>>>> Stashed changes

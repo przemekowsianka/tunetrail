@@ -31,6 +31,10 @@ const ImportedSongs = sequelize.define(
   },
   {
     tableName: "imported_songs",
+<<<<<<< Updated upstream
+=======
+    timestamps: false,
+>>>>>>> Stashed changes
   }
 );
 

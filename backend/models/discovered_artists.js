@@ -40,6 +40,10 @@ const DiscoveredArtists = sequelize.define(
   },
   {
     tableName: "discovered_artists",
+<<<<<<< Updated upstream
+=======
+    timestamps: false,
+>>>>>>> Stashed changes
   }
 );
 

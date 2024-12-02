@@ -22,6 +22,10 @@ const RandomGenres = sequelize.define(
   },
   {
     tableName: "random_genres",
+<<<<<<< Updated upstream
+=======
+    timestamps: false,
+>>>>>>> Stashed changes
   }
 );
 

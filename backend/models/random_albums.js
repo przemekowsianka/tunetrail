@@ -28,6 +28,10 @@ const RandomAlbums = sequelize.define(
   },
   {
     tableName: "random_albums",
+<<<<<<< Updated upstream
+=======
+    timestamps: false,
+>>>>>>> Stashed changes
   }
 );
 

@@ -36,6 +36,10 @@ const ImportedArtists = sequelize.define(
   },
   {
     tableName: "imported_artists",
+<<<<<<< Updated upstream
+=======
+    timestamps: false,
+>>>>>>> Stashed changes
   }
 );
 

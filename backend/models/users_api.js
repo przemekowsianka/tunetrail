@@ -28,6 +28,10 @@ const UserAPI = sequelize.define(
   },
   {
     tableName: "users_api", // Nazwa istniejącej tabeli
+<<<<<<< Updated upstream
+=======
+    timestamps: false,
+>>>>>>> Stashed changes
   }
 );
 

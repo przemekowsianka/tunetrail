@@ -33,6 +33,10 @@ const Playlists = sequelize.define(
   },
   {
     tableName: "playlists",
+<<<<<<< Updated upstream
+=======
+    timestamps: false,
+>>>>>>> Stashed changes
   }
 );
 

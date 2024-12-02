@@ -1,5 +1,9 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+<<<<<<< Updated upstream
+=======
+import { loginUser } from "../services/api";
+>>>>>>> Stashed changes
 
 const LoginForm = () => {
   const {
@@ -8,11 +12,28 @@ const LoginForm = () => {
     formState: { errors },
   } = useForm();
 
+<<<<<<< Updated upstream
   const onSubmit = (data) => {
     console.log("Form Data:", data);
     // tutaj można obsłużyć logikę logowania, np. wysłanie danych do serwera
   };
 
+=======
+  const onSubmit = async (data) => {
+    console.log("Submitting data:", JSON.stringify(data));
+    try {
+      // Wywołanie funkcji API z danymi z formularza
+      const response = await loginUser({
+        login: data.identifier,
+        email: data.identifier,
+        password: data.password,
+      });
+      alert("User logged successfully: " + response.message);
+    } catch (error) {
+      alert("Error: " + (error.response?.data?.error || error.message));
+    }
+  };
+>>>>>>> Stashed changes
   return (
     <div className="login-form">
       <h2>Logowanie</h2>

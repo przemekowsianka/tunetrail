@@ -16,6 +16,10 @@ const SimilarArtists = sequelize.define(
   },
   {
     tableName: "similar_artists",
+<<<<<<< Updated upstream
+=======
+    timestamps: false,
+>>>>>>> Stashed changes
   }
 );
 
